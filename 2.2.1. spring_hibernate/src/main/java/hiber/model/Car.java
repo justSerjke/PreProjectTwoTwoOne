@@ -1,5 +1,8 @@
 package hiber.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
 @Entity
@@ -31,6 +34,14 @@ public class Car {
         this.series = series;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getModel() {
         return model;
     }
@@ -47,22 +58,23 @@ public class Car {
         this.series = series;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Car)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Car car = (Car) o;
 
-        if (getSeries() != car.getSeries()) return false;
-        return getModel().equals(car.getModel());
+        return id.equals(car.id);
     }
 
     @Override
     public int hashCode() {
-        int result = getModel().hashCode();
-        result = 31 * result + getSeries();
-        return result;
+        return id.hashCode();
     }
 
     @Override
