@@ -36,12 +36,11 @@ public class UserDaoImp implements UserDao {
     public User getUserByCar(String model, int series) {
         Car car = null;
         try {
-            String HQL = "from Car where model=?0 and series=?1";
-            Query query = sessionFactory.getCurrentSession()
-                    .createQuery(HQL)
+            TypedQuery<Car> query = sessionFactory.getCurrentSession()
+                    .createQuery("from Car where model=?0 and series=?1")
                     .setParameter(0, model)
                     .setParameter(1, series);
-            car = (Car) query.getSingleResult();
+            car = query.getSingleResult();
         } catch (NoResultException e) {
             System.out.println("User not found");
         }
