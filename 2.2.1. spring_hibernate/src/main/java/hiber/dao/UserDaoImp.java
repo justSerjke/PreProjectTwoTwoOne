@@ -34,7 +34,7 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User getUserByCar(String model, int series) {
-        Car car = null;
+        Car car = new Car();
         try {
             TypedQuery<Car> query = sessionFactory.getCurrentSession()
                     .createQuery("from Car where model=?0 and series=?1")
@@ -44,7 +44,7 @@ public class UserDaoImp implements UserDao {
         } catch (NoResultException e) {
             System.out.println("User not found");
         }
-        return car != null ? car.getUser() : null;
+        return car.getUser();
     }
 }
 
